@@ -18,6 +18,9 @@ class MoviesController < ApplicationController
     rating = params[:ratings]
     movieKeys = rating.keys
     @movies = Movie.find_all_by_rating(movieKeys)
+    if params[:sort]
+      @movies.sort_by!{|item|item.send(params[:sort])}
+    end
     all_ratings
   end
 
