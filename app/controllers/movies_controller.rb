@@ -6,8 +6,13 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
+  def all_ratings
+    @all_ratings = ['G','PG','PG-13','R']
+  end
+
   def index
     @movies = Movie.all
+    all_ratings
   end
 
   def new
