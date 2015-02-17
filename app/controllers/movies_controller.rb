@@ -7,11 +7,17 @@ class MoviesController < ApplicationController
   end
 
   def all_ratings
-    @all_ratings = ['G','PG','PG-13','R']
+    @all_ratings = ['G','PG','PG-13','R', 'NC-17']
   end
 
   def index
-    @movies = Movie.all
+    # @movies = Movie.all
+    if params[:ratings].nil?
+      params[:ratings] = {"G"=>"1.0", "PG"=>"1.0", "PG-13"=>"1.0", "R"=>"1.0", "NC-17"=>"1.0"}
+    end
+    rating = params[:ratings]
+    movieKeys = rating.keys
+    @movies = Movie.find_all_by_rating(movieKeys)
     all_ratings
   end
 
