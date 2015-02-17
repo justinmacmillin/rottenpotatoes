@@ -11,13 +11,14 @@ class MoviesController < ApplicationController
   end
 
   def index
-    # @movies = Movie.all
     if params[:ratings].nil?
-      params[:ratings] = {"G"=>"1.0", "PG"=>"1.0", "PG-13"=>"1.0", "R"=>"1.0", "NC-17"=>"1.0"}
+      @movies = Movie.all
+    else
+      rating = params[:ratings]
+      movieKeys = rating.keys
+      @movies = Movie.find_all_by_rating(movieKeys)
     end
-    rating = params[:ratings]
-    movieKeys = rating.keys
-    @movies = Movie.find_all_by_rating(movieKeys)
+
     if params[:sort]
       @movies.sort_by!{|item|item.send(params[:sort])}
     end

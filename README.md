@@ -315,7 +315,7 @@ by the Ratings checkboxes.
 the checkboxes that were used to filter the output should appear checked
 when the list is redisplayed.  This will require you to modify the
 checkbox form slightly from the version we provided above. 
-
+	
 + The first time the user visits the page, all checkboxes should be
 checked by default (so the user will see all movies).  For now, ignore
 the case when the user unchecks all checkboxes--you will get to this in
