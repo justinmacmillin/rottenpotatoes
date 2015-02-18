@@ -12,9 +12,9 @@ class MoviesController < ApplicationController
 
   def index
 
-    # check params[:rating]
-    if params[:rating]
+    if params[:ratings]
         if params[:sort]
+          @movies = Movie.find_all_by_rating(params[:ratings].keys)
           @movies.sort_by!{|item|item.send(params[:sort])}
         else
           rating = params[:ratings]
