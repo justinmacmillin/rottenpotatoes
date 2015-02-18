@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
       @movies = Movie.find_all_by_rating(movieKeys)
     end
 
-    if params[:sort]
+    if params[:sort] or session[:sort]
       @movies.sort_by!{|item|item.send(params[:sort])}
     end
     all_ratings
