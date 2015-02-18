@@ -12,6 +12,8 @@ class MoviesController < ApplicationController
 
   def index
 
+    # anytime we don't use the params arguments we have to redirect the page to reflect the arugments in the url
+
     if params[:ratings]
         if params[:sort]
           @movies = Movie.find_all_by_rating(params[:ratings].keys)
