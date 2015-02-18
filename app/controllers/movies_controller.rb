@@ -16,6 +16,7 @@ class MoviesController < ApplicationController
         if params[:sort]
           @movies = Movie.find_all_by_rating(params[:ratings].keys)
           @movies.sort_by!{|item|item.send(params[:sort])}
+          session[:sort] = params[:sort]
         else
           rating = params[:ratings]
           session[:ratings] = params[:ratings]
@@ -33,6 +34,7 @@ class MoviesController < ApplicationController
       if params[:sort]
         @movies = Movie.all
         @movies.sort_by!{|item|item.send(params[:sort])}
+        session[:sort] = param[:sort]
       else
         @movies = Movie.all
         @movies.sort_by!{|item|item.send(session[:sort])}
