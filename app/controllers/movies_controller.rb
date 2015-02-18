@@ -29,10 +29,10 @@ class MoviesController < ApplicationController
         else
           redirect_to movies_path(:sort => params[:sort], :ratings => session[:ratings])
         end
-    elsif session[:sort] or param[:sort]
-      if param[:sort]
+    elsif session[:sort] or params[:sort]
+      if params[:sort]
         @movies = Movie.all
-        @movies.sort_by!{|item|item.send(param[:sort])}
+        @movies.sort_by!{|item|item.send(params[:sort])}
       else
         @movies = Movie.all
         @movies.sort_by!{|item|item.send(session[:sort])}
