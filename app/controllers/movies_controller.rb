@@ -31,11 +31,11 @@ class MoviesController < ApplicationController
         end
     elsif session[:sort] or params[:sort]
       if params[:sort]
-        # @movies = Movie.all
-        @movies = Movie.all.sort_by!{|item|item.send(params[:sort])}
+        @movies = Movie.all
+        @movies.sort_by!{|item|item.send(params[:sort])}
       else
-        # @movies = Movie.all
-        @movies = Movie.all.sort_by!{|item|item.send(session[:sort])}
+        @movies = Movie.all
+        @movies.sort_by!{|item|item.send(session[:sort])}
       end
     else
       @movies = Movie.all
