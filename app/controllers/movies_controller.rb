@@ -27,6 +27,7 @@ class MoviesController < ApplicationController
         if session[:sort]
           @movies = Movie.find_all_by_rating(session[:ratings].keys)
           @movies.sort_by!{|item|item.send(session[:sort])}
+          redirect_to movies_path(:sort => session[:sort], :ratings => session[:ratings])
         else
           redirect_to movies_path(:sort => params[:sort], :ratings => session[:ratings])
         end
@@ -38,6 +39,7 @@ class MoviesController < ApplicationController
       else
         @movies = Movie.all
         @movies.sort_by!{|item|item.send(session[:sort])}
+        redirect_to movies_path(:sort => session[:sort], :ratings => session[:ratings])
       end
     else
       @movies = Movie.all
