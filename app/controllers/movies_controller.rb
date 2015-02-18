@@ -11,23 +11,28 @@ class MoviesController < ApplicationController
   end
 
   def index
-    if params[:ratings].nil?
-      @movies = Movie.all
+
+    # check params[:rating]
+    if params[:rating]
+        if params[:sort]
+          @movies.sort_by!{|item|item.send(params[:sort])}
+        else
+          rating = params[:ratings]
+          session[:ratings] = params[:ratings]
+          movieKeys = rating.keys
+          @movies = Movie.find_all_by_rating(movieKeys)
+        end
+    elsif session[:ratings]
+        if session[:sort]
+          @movies = Movie.find_all_by_rating(session[:ratings].keys)
+          @movies.sort_by!{|item|item.send(session[:sort])}
+        else
+          redirect_to movies_path(:sort => params[:sort], :ratings => session[:ratings])
+        end
     else
-      rating = params[:ratings]
-      session[:ratings] = params[:ratings]
-      movieKeys = rating.keys
-      @movies = Movie.find_all_by_rating(movieKeys)
+      @movies = Movie.all
     end
 
-    if params[:sort]
-      session[:sort] = params[:sort]
-    end
-
-    if params[:sort] or session[:sort]
-      sort = params[:sort] || session[:sort]
-      @movies.sort_by!{|item|item.send(sort)}
-    end
     all_ratings
   end
 
