@@ -31,12 +31,21 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   When I check the following ratings: PG,R
   When I uncheck the following ratings: G,PG-13,NC-17
   When I press "ratings_submit"
-
-  Then the "PG" checkbox within 'ratings_form' should be checked
+  Then I should see "The Terminator"
+  And I should see "When Harry Met Sally"
+  And I should see "Amelie"
+  And I should see "The Incredibles"
+  And I should see "Raiders of the Lost Ark"
+  And I should not see "Aladdin"
+  And I should not see "The Help"
+  And I should not see "Chocolat"
+  And I should not see "2001: A Space Odyssey"
+  And I should not see "Chicken Run"
 
 Scenario: all ratings selected
   # see assignment
 
   When I check the following ratings: G,PG,PG-13,R,NC-17
+  When I press "ratings_submit"
   Then I should see all the movies
 

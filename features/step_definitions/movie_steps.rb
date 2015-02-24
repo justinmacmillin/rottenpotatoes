@@ -16,7 +16,7 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
 
-  page.body.index(e1) < page.body.index(e2)
+  assert (page.body.index(e1) < page.body.index(e2))
 
 end
 
@@ -41,11 +41,13 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  Movie.all
+  @moviesAll = Movie.all
+  assert (@moviesAll.length == 10)
 end
 
-Then /"(.*)" rating should be checked in the table: "(.*)"/ do |rating, movies_table|
+Then /"(.*)" rating should be checked in the table: "(.*)"/ do |rating|
   assert (movies_table.include? rating) == true
+  # assert Movie.find_all_by_rating(rating.keys)
 end
 
 Then /^the "(.*)" rating should not be checked in the table: (.*)/ do |rating, movies_table|
