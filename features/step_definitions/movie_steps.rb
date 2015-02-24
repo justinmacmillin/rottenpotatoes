@@ -41,19 +41,10 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  @moviesAll = Movie.all
-  assert (@moviesAll.length == 10)
+
+  movies = Movie.all
+  movies.each do |item|
+    assert (page.body.index(item[:title]))
+  end
 end
 
-Then /"(.*)" rating should be checked in the table: "(.*)"/ do |rating|
-  assert (movies_table.include? rating) == true
-  # assert Movie.find_all_by_rating(rating.keys)
-end
-
-Then /^the "(.*)" rating should not be checked in the table: (.*)/ do |rating, movies_table|
-  assert (movies_table.include? rating) == false
-end
-
-# Given(/^I am on the RottenPotatoes home page$/) do
-#   '/movies'
-# end

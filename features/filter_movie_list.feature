@@ -29,7 +29,7 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to ensure that other movies are not visible
 
   When I check the following ratings: PG,R
-  When I uncheck the following ratings: G,PG-13,NC-17
+  And I uncheck the following ratings: G,PG-13,NC-17
   When I press "ratings_submit"
   Then I should see "The Terminator"
   And I should see "When Harry Met Sally"
