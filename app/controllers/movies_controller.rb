@@ -37,7 +37,7 @@ class MoviesController < ApplicationController
       if params[:sort]
         @movies = Movie.all
         @movies.sort_by!{|item|item.send(params[:sort])}
-        session[:sort] = param[:sort]
+        session[:sort] = params[:sort]
       else
         @movies = Movie.all
         @movies.sort_by!{|item|item.send(session[:sort])}
